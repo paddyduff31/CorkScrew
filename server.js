@@ -21,7 +21,7 @@ connection.once('open', function() {
     console.log('MongoDB connection established successfully');
 })
 
-//
+
 if(process.env.NODE_ENV ==='production') {
     app.use(express.static('client/build'));
 }
