@@ -15,7 +15,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "start": "node backend/server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
   "scripts": {
     "start": "react-scripts start",
