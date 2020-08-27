@@ -8,17 +8,23 @@ mongoose.set('useNewUrlParser', true);
 const todoRoutes = express.Router()
 const PORT = process.env.PORT || 4000;
 
-let Todo = require('./todo.model')
+let Todo = require('./models/todo.model')
 
 app.use(cors());
 app.use(bodyParser.json());
 
+// MongoDB setup 
 mongoose.connect('mongodb+srv://paddy_duff:B1ll0fD!16@cluster0.gkkkt.mongodb.net/Cluster0?retryWrites=true&w=majority');
 const connection = mongoose.connection;
 
 connection.once('open', function() {
     console.log('MongoDB connection established successfully');
 })
+
+//
+if(process.env.NODE_ENV ==='production') {
+    app.use(express.static('client/build'));
+}
 
 todoRoutes.route('/').get(function(req, res) {
     Todo.find(function(err, todos) {
