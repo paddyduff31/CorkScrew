@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useNewUrlParser', true);
 const todoRoutes = express.Router()
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 let Todo = require('./todo.model')
 
