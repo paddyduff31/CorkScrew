@@ -18,7 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB setup 
-mongoose.connect('mongodb+srv://paddy_duff:B1ll0fD!16@cluster0.gkkkt.mongodb.net/Cluster0?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 });
@@ -79,9 +79,7 @@ app.use('/todos/', todoRoutes);
 
 if(process.env.NODE_ENV ==='production') {
     app.use(express.static('client/build'));
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-    });
+    
 }
 
 app.listen(PORT, function() {
