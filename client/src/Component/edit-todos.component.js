@@ -24,7 +24,7 @@ export default class EditTodo extends Component {
     componentDidMount() {
         this._isMounted = true;
 
-        axios.get('http://localhost:4000/todos/'+this.props.match.params.id)
+        axios.get('/todos/'+this.props.match.params.id)
             .then(response => {
                 if (this._isMounted) {
                     this.setState({
@@ -76,7 +76,7 @@ export default class EditTodo extends Component {
             todo_priority: this.state.todo_priority,
             todo_completed: this.state.todo_completed
         };
-        axios.post('http://localhost:4000/todos/update/' + this.props.match.params.id + '/', obj)
+        axios.post('/todos/update/' + this.props.match.params.id + '/', obj)
             .then(res => console.log(res.data));
 
         this.props.history.push('/')

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+const PORT = process.env.PORT || 4000;
 
 const Todo = props => (
     <tr>
@@ -29,7 +30,7 @@ export default class TodosList extends Component {
     }
 
     componentDidUpdate() {
-        axios.get('http://localhost:4000/todos/')
+        axios.get('/todos/')
             .then(response => {
                 this.setState({todos: response.data});
             })

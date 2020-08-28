@@ -1,30 +1,32 @@
+// Importing Modules
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mongoose = require('mongoose')
-mongoose.set('useUnifiedTopology', true);
-mongoose.set('useNewUrlParser', true);
-const todoRoutes = express.Router()
-const PORT = process.env.PORT || 8080;
+const mongoose = require('mongoose');
+const path = require('path');
 
+// importing files
 let Todo = require('./models/todo.model')
 
+// Define Global Variables
+const app = express();
+const todoRoutes = express.Router()
+const PORT = process.env.PORT || 4000;
+
+//Configuration
 app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB setup 
-mongoose.connect('mongodb+srv://paddy_duff:B1ll0fD!16@cluster0.gkkkt.mongodb.net/Cluster0?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://paddy_duff:B1ll0fD!16@cluster0.gkkkt.mongodb.net/Cluster0?retryWrites=true&w=majority', {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+});
 const connection = mongoose.connection;
 
 connection.once('open', function() {
     console.log('MongoDB connection established successfully');
 })
-
-
-if(process.env.NODE_ENV ==='production') {
-    app.use(express.static('client/build'));
-}
 
 todoRoutes.route('/').get(function(req, res) {
     Todo.find(function(err, todos) {
@@ -73,7 +75,14 @@ todoRoutes.route('/update/:id').post(function(req, res) {
     }});
 });
 
-app.use('/todos', todoRoutes);
+app.use('/todos/', todoRoutes);
+
+if(process.env.NODE_ENV ==='production') {
+    app.use(express.static('client/build'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT)
