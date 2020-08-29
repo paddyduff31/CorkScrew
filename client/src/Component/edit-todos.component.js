@@ -24,7 +24,7 @@ export default class EditTodo extends Component {
     componentDidMount() {
         this._isMounted = true;
 
-        axios.get('/todos/'+this.props.match.params.id)
+        axios.get('https://corkscrew.herokuapp.com/todos/'+this.props.match.params.id)
             .then(response => {
                 if (this._isMounted) {
                     this.setState({
