@@ -1,7 +1,7 @@
 // Importing Modules
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+
 const mongoose = require('mongoose');
 const path = require('path');
 
@@ -14,7 +14,7 @@ const todoRoutes = express.Router()
 const PORT = process.env.PORT || 4000;
 
 //Configuration
-app.use(cors());
+
 app.use(bodyParser.json());
 
 // MongoDB setup 
