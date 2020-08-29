@@ -20,7 +20,7 @@ export default class TodosList extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://corkscrew.herokuapp.com/todos/')
+        axios.get('/todos/')
             .then(response => {
                 this.setState({todos: response.data});
             })
@@ -30,7 +30,7 @@ export default class TodosList extends Component {
     }
 
     componentDidUpdate() {
-        axios.get('https://corkscrew.herokuapp.com/todos/')
+        axios.get('/todos/')
             .then(response => {
                 this.setState({todos: response.data});
             })
