@@ -38,10 +38,6 @@ function App() {
           </ul>
 
         </div>
-        <Form inline className="ml-auto">
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-success">Search</Button>
-    </Form>
       </nav>
       <Route path="/" exact component={TodosList}/>
       <Route path="/edit/:id" component={EditTodo}/>
