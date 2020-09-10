@@ -1,98 +1,31 @@
-// Importing Modules
 const express = require('express');
-const bodyParser = require('body-parser');
-
-const mongoose = require('mongoose');
+const connectDB = require('./config/db');
 const path = require('path');
 
-// importing files
-let Todo = require('./models/todo.model')
-
-// Define Global Variables
 const app = express();
-const todoRoutes = express.Router()
-const PORT = process.env.PORT || 4000;
 
-//Configuration
+// Connect Database
+connectDB();
 
-app.use(bodyParser.json());
+// Init Middleware
+app.use(express.json());
 
-// MongoDB setup 
-mongoose.connect(MONGODB_URI || 'mongodb+srv://paddy_duff:B1ll0fD!16@cluster0.gkkkt.mongodb.net/Cluster0?retryWrites=true&w=majority', {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false
-});
-const connection = mongoose.connection;
-
-connection.once('open', function() {
-    console.log('MongoDB connection established successfully');
-})
-
-todoRoutes.route('/').get(function(req, res) {
-    Todo.find(function(err, todos) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json(todos);
-        }
-    });
-});
-
-todoRoutes.route('/:id').get(function(req, res) {
-    let id = req.params.id;
-    Todo.findById(id, function(err, todo) {
-        res.json(todo);
-    });
-});
-
-todoRoutes.route('/add').post(function(req, res) {
-    let todo = new Todo(req.body);
-    todo.save()
-        .then(todo => {
-            res.status(200).json({'todo': 'todo added successfully'});
-        })
-        .catch(err => {
-            res.status(400).send('adding new todo failed');
-        });
-});
-
-todoRoutes.route('/update/:id').post(function(req, res) {
-    Todo.findById(req.params.id, function(err, todo) {
-        if(!todo) {
-            res.status(404).send('data is not found');
-        } else {
-            todo.todo_description = req.body.todo_description;
-            todo.todo_responsible = req.body.todo_responsible;
-            todo.todo_priority = req.body.todo_priority;
-            todo.todo_completed = req.body.todo_completed;
-
-            todo.save().then(todo => {
-                res.json('Todo updated')
-            })
-            .catch(err => {
-                res.status(400).send('Update not possible');
-            });
-    }});
-});
-
+// Define Routes
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/posts', require('./routes/api/posts'));
-app.use('/api/tills', require('./routes/api/tills'));
 
-app.use('/todos/', todoRoutes);
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
 
-if(process.env.NODE_ENV ==='production') {
-    app.use(express.static('client/build'));
-
-    app.get('*', (req, res) =>{
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
 }
 
-app.listen(PORT, function() {
-    console.log("Server is running on Port: " + PORT)
-});
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
