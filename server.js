@@ -20,7 +20,9 @@ app.use(bodyParser.json());
 // MongoDB setup 
 mongoose.connect('mongodb+srv://paddy_duff:B1ll0fD!16@cluster0.gkkkt.mongodb.net/Cluster0?retryWrites=true&w=majority', {
     useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 });
 const connection = mongoose.connection;
 
@@ -75,11 +77,20 @@ todoRoutes.route('/update/:id').post(function(req, res) {
     }});
 });
 
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/posts', require('./routes/api/posts'));
+app.use('/api/tills', require('./routes/api/tills'));
+
 app.use('/todos/', todoRoutes);
 
 if(process.env.NODE_ENV ==='production') {
     app.use(express.static('client/build'));
-    
+
+    app.get('*', (req, res) =>{
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
 }
 
 app.listen(PORT, function() {

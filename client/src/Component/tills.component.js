@@ -1,25 +1,27 @@
 import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
+import Col from 'react-bootstrap/Col'
 
 
 export default class CreateTodo extends Component {
     render() {
         return (
             <div className="ml-3">
-                <Card className="text-center mt-1" border="primary"><Card.Title>Sweet Afton</Card.Title></Card>
+                <h4>Sweet Afton</h4>
                 
                 <Form inline className="mt-2"> 
-                    <Form.Control placeholder="Cash" />
-                    <Form.Control placeholder="Card" />
-                    <Form.Control placeholder="Payouts" />
-                    <Form.Control placeholder="Food" />
-                    <Form.Control placeholder="Drink" />
-                    <Form.Control placeholder="Turnover" />
-                    <Button type="submit" className="my-1">
-                        Submit
-                    </Button>
+                <Form.Row className="align-items-center">
+                    <Col xs={1}><Form.Control placeholder="Cash" /></Col>
+                    <Col xs={1}><Form.Control placeholder="Card" /></Col>
+                    <Col xs={1}><Form.Control placeholder="Payouts" /></Col>
+                    <Col xs={1}><Form.Control placeholder="Food" /></Col>
+                    <Col xs={1}><Form.Control placeholder="Drink" /></Col>
+                    <Col xs={1}><Form.Control placeholder="Turnover" /></Col>
+                    <Col xs={1}><Button type="submit" className="my-1">Submit</Button></Col>
+                    
+                </Form.Row>
+                    
                 </Form>
                 <Form inline className="mt-2"> 
                     <Form.Control placeholder="Cash" />
