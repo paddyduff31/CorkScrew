@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 4000;
 app.use(bodyParser.json());
 
 // MongoDB setup 
-mongoose.connect('mongodb+srv://paddy_duff:B1ll0fD!16@cluster0.gkkkt.mongodb.net/Cluster0?retryWrites=true&w=majority', {
+mongoose.connect(MONGODB_URI || 'mongodb+srv://paddy_duff:B1ll0fD!16@cluster0.gkkkt.mongodb.net/Cluster0?retryWrites=true&w=majority', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
