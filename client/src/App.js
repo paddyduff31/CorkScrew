@@ -13,6 +13,10 @@ import Login from './Component/auth/Login';
 import Register from './Component/auth/Register';
 import Alert from './Component/layout/Alert';
 import Dashboard from './Component/dashboard/Dashboard'
+import Tills from './Component/tills/Tills.js'
+import PrivateRoute from './Component/routing/PrivateRoue'
+import CreateProfile from './Component/profile-forms/CreateProfile'
+import EditProfile from './Component/profile-forms/EditProfile'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -33,7 +37,10 @@ const App = () => {
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
-              <Route exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute exact path='/create-profile' component={CreateProfile} />
+              <PrivateRoute exact path='/edit-profile' component={EditProfile} />
+              <PrivateRoute exact path='/tills' component={Tills} />
             </Switch>
           </section>
         </Fragment>

@@ -61,17 +61,18 @@ router.post(
     } = req.body;
 
     // Build profile object
-    const profileFields = {};
-    profileFields.user = req.user.id;
-    if (company) profileFields.company = company;
-    if (website) profileFields.website = website;
-    if (location) profileFields.location = location;
-    if (bio) profileFields.bio = bio;
-    if (status) profileFields.status = status;
-    if (githubusername) profileFields.githubusername = githubusername;
-    if (skills) {
-      profileFields.skills = skills.split(',').map((skill) => skill.trim());
-    }
+    const profileFields = {
+      user: req.user.id,
+      company,
+      location,
+      website,
+      bio,
+      skills: Array.isArray(skills)
+        ? skills
+        : skills.split(',').map((skill) => ' ' + skill.trim()),
+      status,
+      githubusername
+    };
 
     // Build Social object
     profileFields.social = {};
