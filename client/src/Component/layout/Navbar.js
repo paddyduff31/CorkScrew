@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
-import Dashboard from '../dashboard/Dashboard';
-import Tills from '../tills/Tills.js';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
@@ -43,7 +41,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   return (
     <nav className='navbar bg-dark'>
       <Link to='/'>
-        <img src={logo} width='auto' height='50' alt='Corckscrew Logo'></img>
+        <img src={logo}  alt='Corckscrew Logo'></img>
       </Link>
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>

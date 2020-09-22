@@ -1,5 +1,6 @@
 import { GET_TILL, TILL_ERROR, CLEAR_TILL } from "../actions/types";
 
+
 const initialState = {
     till: null,
     tills: [],

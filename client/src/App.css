@@ -38,7 +38,6 @@
   .container {
     max-width: 1100px;
     margin: auto;
-    overflow: hidden;
     padding: 0 2rem;
     margin-top: 6rem;
     margin-bottom: 3rem;
@@ -328,6 +327,22 @@
   
   .navbar .welcome span {
     margin-right: 0.6rem;
+  }
+
+  .tills{
+    width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+    
+  }
+
+  .tills-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
   /* Landing Page */
