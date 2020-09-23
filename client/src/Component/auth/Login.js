@@ -3,6 +3,20 @@ import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { login } from '../../actions/auth'
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  FormGroup,
+  Form,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Row,
+  Col
+} from "reactstrap";
 
 
 export const Login = ({login, isAuthenticated}) => {
@@ -31,6 +45,7 @@ export const Login = ({login, isAuthenticated}) => {
 
   return (
     <Fragment>
+      
       <h1 className='large text-primary'>Login</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Sign Into Your Account

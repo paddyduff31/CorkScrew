@@ -1,4 +1,5 @@
 /* Global Styles */
+
 :root {
     --primary-color: #17a2b8;
     --dark-color: #343a40;
@@ -36,11 +37,11 @@
   
   /* Utilities */
   .container {
-    max-width: 1100px;
-    margin: auto;
+   
+    
     padding: 0 2rem;
     margin-top: 6rem;
-    margin-bottom: 3rem;
+    
   }
   
   /* Text Styles*/
@@ -297,7 +298,7 @@
     background: var(--light-color);
   }
   
-  /* Navbar */
+  /* Navbar
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -327,15 +328,14 @@
   
   .navbar .welcome span {
     margin-right: 0.6rem;
-  }
+  } */
 
   .tills{
-    width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+    display: flex;
+    height: 90vh;    
+  }
+  .till-add {
+    display: inline-flex;
     
   }
 
